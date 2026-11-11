@@ -1,11 +1,127 @@
 <!DOCTYPE html>
+
+<!-- WePlay - Sign Up Page -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Create a free WePlay account.">
+    <title>WePlay - Sign Up</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
+    <!-- ===== Header: logo + menu (same on every page) ===== -->
+    <header id="top">
+        <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="90" usemap="#logomap">
+        <map name="logomap">
+            <area shape="rect" coords="0,0,300,90" href="aboutUs.html" alt="About Us">
+        </map>
+
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html" class="current">Sign Up</a></li>
+                <li><a href="aboutUs.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main">
+
+        <!-- ===== Sign up form ===== -->
+        <section class="box form-box">
+            <h2>Create Your Account</h2>
+            <p>Join WePlay for free and never miss a Saudi esports match.</p>
+
+            <form id="signupForm" action="#" method="post" autocomplete="on">
+
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" class="field"
+                       placeholder="Your full name" maxlength="40" autofocus required>
+                <span class="error" id="nameError"></span>
+<br><br>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="field"
+                       placeholder="example@email.com" required>
+                <span class="error" id="emailError"></span>
+<br><br>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="field"
+                       placeholder="05XXXXXXXX" maxlength="10" required>
+                <span class="error" id="phoneError"></span>
+<br><br>
+                <label for="birthDate">Date of Birth</label>
+                <input type="date" id="birthDate" name="birthDate" class="field">
+<br><br>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="field"
+                       placeholder="At least 8 characters" required>
+                <span class="error" id="passwordError"></span>
+<br><br>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="field"
+                       placeholder="Enter the password again" required>
+                <span class="error" id="confirmError"></span>
+<br><br>
+                <!-- Radio buttons: same name so only one can be chosen -->
+                <p class="group-title">Gender</p>
+                <input type="radio" id="male" name="gender" value="male" checked>
+                <label for="male" class="inline-label">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="inline-label">Female</label>
+<br><br>
+                <!-- Drop-down list -->
+                <label for="favGame">What is your Favorite Game ?</label>
+                <select id="favGame" name="favGame" class="field">
+                    <option value="">-- Choose a game --</option>
+                    <option value="valorant">Valorant</option>
+                    <option value="rocket">Rocket League</option>
+                    <option value="fc">EA SPORTS FC</option>
+                    <option value="dota">Dota 2</option>
+                </select>
+
+                <!-- Checkboxes: more than one can be chosen -->
+                <p class="group-title">Clubs That You Follow</p>
+                <input type="checkbox" id="falcons" name="clubs" value="falcons">
+                <label for="falcons" class="inline-label">Team Falcons</label>
+                <input type="checkbox" id="twisted" name="clubs" value="twisted">
+                <label for="twisted" class="inline-label">Twisted Minds</label>
+                <input type="checkbox" id="r8" name="clubs" value="r8">
+                <label for="r8" class="inline-label">R8 Esports</label>
+
+                <p>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms" class="inline-label">I agree to the terms and conditions</label>
+                </p>
+                <span class="error" id="termsError"></span>
+
+                <input type="submit" value="Sign Up" class="form-btn">
+                <input type="reset" value="Clear" class="form-btn reset-btn">
+            </form>
+
+            <p class="form-note">
+                Already have an account? <a href="login.html">Log in here</a>
+            </p>
+        </section>
+
+    </div>
+
+    <!-- ===== Footer (same on every page) ===== -->
+    <footer>
+        <p>&copy; 2026 WePlay - CPIS-358 Project</p>
+        <p>
+            <a href="index.html">Home</a> |
+            <a href="login.html">Login</a> |
+            <a href="signup.html">Sign Up</a> |
+            <a href="aboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <!-- External JavaScript (teammate's file) -->
+    <script src="js/script.js"></script>
 </body>
 </html>

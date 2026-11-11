@@ -1,11 +1,116 @@
 <!DOCTYPE html>
+
+<!-- WePlay - About Us Page -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Learn about the WePlay team and our goal.">
+    <title>WePlay - About Us</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
+    <!-- ===== Header: logo + menu (same on every page) ===== -->
+    <header id="top">
+        <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="90" usemap="#logomap">
+        <map name="logomap">
+            <area shape="rect" coords="0,0,300,90" href="aboutUs.html" alt="About Us">
+        </map>
+
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="aboutUs.html" class="current">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main">
+
+        <!-- ===== Our story ===== -->
+        <article class="box">
+            <h2>Our Story</h2>
+            <p>
+                We are students at King Abdulaziz University who love esports.
+                We noticed that Saudi fans had to check many accounts just to know
+                when their team plays, so we built <strong>WePlay</strong>.
+            </p>
+
+            <aside class="side-note">
+                <h3>Our Goal</h3>
+                <p>Make following Saudi esports as easy as checking one page.</p>
+            </aside>
+        </article>
+
+        <!-- ===== What we offer: nested list ===== -->
+        <section class="box">
+            <h2>What We Offer</h2>
+            <ul>
+                <li>Match schedules
+                    <ul>
+                        <li>Date and time in KSA time</li>
+                        <li>Game and tournament name</li>
+                    </ul>
+                </li>
+                <li>Club information</li>
+                <li>A free account to follow your clubs</li>
+            </ul>
+        </section>
+
+        <!-- ===== Team table ===== -->
+        <section class="box">
+            <h2>Our Team</h2>
+            <table class="matches">
+                <caption>CPIS-358 Group Members</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Student ID</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Joory Alsulami</td>
+                        <td>2406407</td>
+                        <td>HTML, CSS and GitHub</td>
+                    </tr>
+                    <tr>
+                        <td>Nouf Seraj</td>
+                        <td>2405653</td>
+                        <td>JavaScript</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== Contact ===== -->
+        <section class="box">
+            <h2>Contact Us</h2>
+            <p>Have a suggestion or found a match we missed? Send us an email:</p>
+            <p><a href="mailto:weplay@example.com">weplay@example.com</a></p>
+        </section>
+
+        <p><a href="#top">Back to top</a></p>
+    </div>
+
+    <!-- ===== Footer (same on every page) ===== -->
+    <footer>
+        <p>&copy; 2026 WePlay - CPIS-358 Project</p>
+        <p>
+            <a href="index.html">Home</a> |
+            <a href="login.html">Login</a> |
+            <a href="signup.html">Sign Up</a> |
+            <a href="aboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <!-- External JavaScript (teammate's file) -->
+    <script src="js/script.js"></script>
 </body>
 </html>

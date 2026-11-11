@@ -1,12 +1,183 @@
 <!DOCTYPE html>
+
+<!-- WePlay - Home Page -->
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/style.css"
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="WePlay collects Saudi esports matches in one place.">
+    <meta name="keywords" content="esports, Saudi, matches, Team Falcons, Twisted Minds">
+    <title>WePlay - Home</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Embedded (Internal) CSS: styles for this page only -->
+    <style type="text/css">
+        .hero {
+            background-image: linear-gradient(to right, #549554, #3a6248);
+        }
+        .hero h1 {
+            color: white;
+            font-size: 36px;
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <!-- ===== Header: logo + menu (same on every page) ===== -->
+    <header id="top">
+        <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="100" usemap="#logomap">
+        <map name="logomap">
+            <area shape="rect" coords="0,0,200,60" href="aboutUs.html" alt="About Us">
+        </map>
+
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html" class="current">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="aboutUs.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== Hero: layering with z-index ===== -->
+    <section class="hero">
+        <div class="circle"></div>
+        <div class="hero-text">
+            <h1>All Saudi Esports Matches in One Place</h1>
+            <p>Know who plays, when, and in which game.</p>
+            <a href="#matches" class="btn">See Matches</a>
+        </div>
+    </section>
+
+    <!-- ===== Internal links (links within the page) ===== -->
+    <p class="quick-links">
+        <a href="#idea">The Idea</a> |
+        <a href="#benefits">Benefits</a> |
+        <a href="#matches">Matches</a> |
+        <a href="#clubs">Clubs</a>
+    </p>
+
+    <div class="main">
+
+        <!-- ===== The idea ===== -->
+        <article id="idea" class="box">
+            <h2>What is WePlay?</h2>
+            <p>
+                Saudi esports is growing fast, but match information is spread across
+                many accounts. Fans often miss their team's match because they did not
+                know the time or the game.
+            </p>
+            <p>
+                <strong>WePlay</strong> collects the matches of Saudi esports clubs in
+                <mark>one simple website</mark>, so fans can see the schedule in seconds.
+            </p>
+        </article>
+
+        <!-- ===== Benefits: unordered list ===== -->
+        <section id="benefits" class="box">
+            <h2>Why Use WePlay?</h2>
+            <ul>
+                <li>One schedule for all Saudi clubs.</li>
+                <li>Clear match times so you never miss a game.</li>
+                <li>Information about each club and its games.</li>
+            </ul>
+
+            <h3>How It Works</h3>
+            <!-- Ordered list -->
+            <ol>
+                <li>Create a free account from the Sign Up page.</li>
+                <li>Check the upcoming matches table.</li>
+                <li>Follow your favorite clubs.</li>
+            </ol>
+        </section>
+
+        <!-- ===== Matches: table ===== -->
+        <section id="matches" class="box">
+            <span class="badge">NEW</span>
+            <h2>Upcoming Matches</h2>
+
+            <table class="matches">
+                <caption>Sample schedule (KSA time)</caption>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Game</th>
+                        <th>Match</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15 Nov 2026</td>
+                        <td>8:00 PM</td>
+                        <td>Valorant</td>
+                        <td>Team Falcons vs Twisted Minds</td>
+                    </tr>
+                    <tr>
+                        <td>17 Nov 2026</td>
+                        <td>9:30 PM</td>
+                        <td>Rocket League</td>
+                        <td>Team Falcons vs R8 Esports</td>
+                    </tr>
+                    <tr>
+                        <td>20 Nov 2026</td>
+                        <td>7:00 PM</td>
+                        <td>EA SPORTS FC</td>
+                        <td>Al Qadsiah vs Twisted Minds</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">More matches are added every week.</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- ===== Clubs: multiple columns ===== -->
+        <section id="clubs" class="box">
+            <h2>Saudi Clubs</h2>
+            <div class="columns">
+                <p><strong>Team Falcons:</strong> one of the biggest esports clubs in the region, competing in many games.</p>
+                <p><strong>Twisted Minds:</strong> a strong Saudi club known for its shooter and fighting game teams.</p>
+                <p><strong>R8 Esports:</strong> a Saudi club competing in local and regional tournaments.</p>
+            </div>
+
+            <!-- Inline CSS -->
+            <p style="color: #6F717A; font-style: italic;">More clubs will be added soon.</p>
+        </section>
+
+        <!-- ===== FAQ: details and summary ===== -->
+        <section class="box">
+            <h2>Questions</h2>
+            <details>
+                <summary>Is WePlay free?</summary>
+                <p>Yes, creating an account and checking matches is free.</p>
+            </details>
+            <details>
+                <summary>Which games are included?</summary>
+                <p>Valorant, Rocket League, EA SPORTS FC, Dota 2 and more.</p>
+            </details>
+        </section>
+
+        <p><a href="#top">Back to top</a></p>
+    </div>
+
+    <!-- ===== Footer (same on every page) ===== -->
+    <footer>
+        <p>&copy; 2026 WePlay - CPIS-358 Project</p>
+        <p>
+            <a href="index.html">Home</a> |
+            <a href="login.html">Login</a> |
+            <a href="signup.html">Sign Up</a> |
+            <a href="aboutUs.html">About Us</a>
+        </p>
+    </footer>
+
+    <!-- External JavaScript (teammate's file) -->
+    <script src="js/script.js"></script>
 </body>
 </html>
