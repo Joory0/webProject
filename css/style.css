@@ -1,6 +1,4 @@
-/* ===== WePlay - External Style Sheet (Neon Gaming Theme) ===== */
 
-/* ----- Page ----- */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -27,7 +25,7 @@ h3 {
     text-shadow: 0px 0px 8px rgba(209, 123, 255, 0.6);
 }
 
-/* ----- Header and menu (same on every page) ----- */
+/* ----- Header and menu with neon color and shadow ----- */
 header {
     background-color: #1E1F26;
     text-align: center;
@@ -60,14 +58,14 @@ header {
     box-shadow: 0px 0px 10px #D17BFF;
 }
 
-/* the page the user is on now */
+/* the page the user is on now (best practices) */
 .menu a.current {
     color: #15161B;
     background-color: #39FF88;
     box-shadow: 0px 0px 12px #39FF88;
 }
 
-/* ----- Hero: layering (z-index) ----- */
+/* ----- layering (z-index) ----- */
 .hero {
     position: relative;
     height: 260px;
@@ -107,7 +105,7 @@ header {
     margin-bottom: 30px;
 }
 
-/* ----- General classes (can be used on any page) ----- */
+/* ----- General classes style ----- */
 a.btn {
     background-color: #39FF88;
     color: #15161B;
@@ -140,7 +138,7 @@ a.btn:hover {
     box-shadow: 0px 0px 12px rgba(209, 123, 255, 0.25);
 }
 
-/* badge on top of the box (layering) */
+/* the NEW badge on top of the upcoming matches box (layering) */
 .badge {
     position: absolute;
     top: -12px;
@@ -218,7 +216,7 @@ strong {
     color: #FFFFFF;
 }
 
-/* ----- Footer (same on every page) ----- */
+/* ----- Footer nav ----- */
 footer {
     background-color: #0E0F13;
     border-top: 2px solid #D17BFF;
@@ -232,14 +230,3 @@ footer a:link, footer a:visited {
     color: #39FF88;
 }
 
-/* ----- Print version (media types) ----- */
-@media print {
-    body {
-        background-color: white;
-        color: black;
-        font-family: Georgia, serif;
-    }
-    nav, footer {
-        display: none;
-    }
-}
