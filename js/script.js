@@ -9,8 +9,6 @@
 
 
 // ---------- Global variables ----------
-var themeNumber = 1;           // current color theme (1, 2 or 3)
-var gameNumber = 1;            // game shown under the picture
 var moreMatchesShown = false;  // is the extra matches table showing?
 var termsAccepted = false;     // is the terms checkbox ticked?
 
@@ -53,79 +51,8 @@ function clearField(fieldId, errorId) {
 // when the user clicks inside a field, color it light yellow
 function addFocusEffect(fieldId) {
     document.getElementById(fieldId).onfocus = function () {
-        this.style.backgroundColor = "lightyellow";
+        document.getElementById(fieldId).style.backgroundColor = "lightyellow";
     };
-}
-
-// change the colors of one box if it exists on this page
-function colorBox(boxId, background, text) {
-    var box = document.getElementById(boxId);
-
-    if (box != null) {
-        box.style.backgroundColor = background;
-        box.style.color = text;
-    }
-}
-
-
-/* ---------------------------------------------------------
-   2. THEME BUTTON (all pages) - changes CSS with a switch
-   --------------------------------------------------------- */
-
-function addThemeButton() {
-    // add a new button element to the header
-    document.getElementById("top").innerHTML +=
-        "<button id='themeBtn' onclick='changeTheme()' " +
-        "style='position: fixed; bottom: 20px; left: 20px; z-index: 1000; " +
-        "padding: 10px 16px; border: none; border-radius: 20px; " +
-        "background-color: #3a6248; color: white; cursor: pointer;'>" +
-        "Theme: Default</button>";
-}
-
-function changeTheme() {
-    var headerColor;
-    var boxColor;
-    var textColor;
-    var themeName;
-
-    themeNumber++;
-    if (themeNumber > 3)
-        themeNumber = 1;
-
-    switch (themeNumber) {
-        case 1:
-            headerColor = "";
-            boxColor = "";
-            textColor = "";
-            themeName = "Default";
-            break;
-        case 2:
-            headerColor = "#1e1e1e";
-            boxColor = "#2b2b2b";
-            textColor = "white";
-            themeName = "Dark";
-            break;
-        case 3:
-            headerColor = "#3a6248";
-            boxColor = "#e8f5e9";
-            textColor = "black";
-            themeName = "Green";
-            break;
-    } // end switch
-
-    document.getElementById("top").style.backgroundColor = headerColor;
-
-    // home page boxes
-    colorBox("idea", boxColor, textColor);
-    colorBox("benefits", boxColor, textColor);
-    colorBox("matches", boxColor, textColor);
-    colorBox("clubs", boxColor, textColor);
-
-    // form pages
-    colorBox("signupForm", boxColor, textColor);
-    colorBox("loginForm", boxColor, textColor);
-
-    document.getElementById("themeBtn").innerHTML = "Theme: " + themeName;
 }
 
 
@@ -152,68 +79,27 @@ function showGreeting() {
         document.getElementById("idea").innerHTML;
 }
 
-// add a picture that reacts to the mouse
-function addGamePicture() {
-    document.getElementById("idea").innerHTML +=
-        "<p><img id='gamePic' src='images/weplay-img.jpg' alt='WePlay' width='300' " +
-        "onmouseover='zoomPicture()' onmouseout='resetPicture()' onclick='nextGame()' " +
-        "style='cursor: pointer;'></p>" +
-        "<p id='gameText'><strong>Game of the day:</strong> Valorant</p>" +
-        "<p><small>Click the picture to see the next game.</small></p>";
-}
-
 function zoomPicture() {
-    var picture = document.getElementById("gamePic");
+    var picture = document.getElementById("logoPic");
     picture.width = 330;
+    picture.height = 99;
     picture.style.border = "4px solid #549554";
     picture.style.borderRadius = "10px";
 }
 
 function resetPicture() {
-    var picture = document.getElementById("gamePic");
+    var picture = document.getElementById("logoPic");
     picture.width = 300;
+    picture.height = 90;
     picture.style.border = "";
     picture.style.borderRadius = "";
-}
-
-// change the game name and the picture's glow color
-function nextGame() {
-    var gameName;
-    var color;
-
-    gameNumber++;
-    if (gameNumber > 4)
-        gameNumber = 1;
-
-    switch (gameNumber) {
-        case 1:
-            gameName = "Valorant";
-            color = "#ff4655";
-            break;
-        case 2:
-            gameName = "Rocket League";
-            color = "#0078f2";
-            break;
-        case 3:
-            gameName = "EA SPORTS FC";
-            color = "#1db954";
-            break;
-        default:
-            gameName = "Dota 2";
-            color = "#a83232";
-    } // end switch
-
-    document.getElementById("gameText").innerHTML =
-        "<strong>Game of the day:</strong> " + gameName;
-    document.getElementById("gameText").style.color = color;
-    document.getElementById("gamePic").style.boxShadow = "0 0 15px " + color;
 }
 
 // add the "Show more matches" button and an empty place for the table
 function addMoreMatchesButton() {
     document.getElementById("matches").innerHTML +=
-        "<button id='moreBtn' class='btn' onclick='toggleMoreMatches()' " +
-        "style='cursor: pointer;'>Show more matches</button>" +
+        "<button id='moreBtn' class='btn' onclick='toggleMoreMatches()'>" +
+        "Show more matches</button>" +
         "<div id='moreMatches'></div>";
 }
 
@@ -241,8 +127,8 @@ function toggleMoreMatches() {
     if (moreMatchesShown == false) {
         // build the rows with a for loop
         for (var i = 1; i <= 3; i++) {
-            rows += "<tr onmouseover='highlightRow(this)' onmouseout='normalRow(this)'>" +
-                getMatchRow(i) + "</tr>";
+            rows += "<tr id='extraRow" + i + "' onmouseover='highlightRow(" + i + ")' " +
+                "onmouseout='normalRow(" + i + ")'>" + getMatchRow(i) + "</tr>";
         }
 
         document.getElementById("moreMatches").innerHTML =
@@ -260,12 +146,12 @@ function toggleMoreMatches() {
     }
 }
 
-function highlightRow(row) {
-    row.style.backgroundColor = "#d9f0d9";
+function highlightRow(number) {
+    document.getElementById("extraRow" + number).style.backgroundColor = "#d9f0d9";
 }
 
-function normalRow(row) {
-    row.style.backgroundColor = "";
+function normalRow(number) {
+    document.getElementById("extraRow" + number).style.backgroundColor = "";
 }
 
 
@@ -377,18 +263,14 @@ function validateBirthDate(showAlert) {
         return true;                    // the field is optional
     }
 
-    var birth = new Date(field.value);
-    var today = new Date();
+    var birthYear = parseInt(field.value);
+    var age = 2026 - birthYear;
 
-    // subtracting two dates gives milliseconds
-    var days = (today - birth) / (1000 * 60 * 60 * 24);
-    var years = days / 365.25;
-
-    if (days < 0)
+    if (age < 0)
         message = "Date of birth cannot be in the future.";
-    else if (years < 10)
+    else if (age < 10)
         message = "You must be at least 10 years old to sign up.";
-    else if (years > 100)
+    else if (age > 100)
         message = "Please enter a valid date of birth (not more than 100 years ago).";
 
     if (message != "") {
@@ -552,27 +434,27 @@ function setupSignupForm() {
 
     // check each field when the user leaves it
     document.getElementById("fullName").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("fullName").style.backgroundColor = "";
         validateName();
     };
     document.getElementById("email").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("email").style.backgroundColor = "";
         validateEmail("email", "emailError");
     };
     document.getElementById("phone").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("phone").style.backgroundColor = "";
         validatePhone();
     };
     document.getElementById("birthDate").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("birthDate").style.backgroundColor = "";
         validateBirthDate(true);
     };
     document.getElementById("password").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("password").style.backgroundColor = "";
         validatePassword();
     };
     document.getElementById("confirmPassword").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("confirmPassword").style.backgroundColor = "";
         validateConfirm();
     };
 
@@ -615,11 +497,11 @@ function setupLoginForm() {
     addFocusEffect("loginPassword");
 
     document.getElementById("loginEmail").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("loginEmail").style.backgroundColor = "";
         validateEmail("loginEmail", "loginEmailError");
     };
     document.getElementById("loginPassword").onblur = function () {
-        this.style.backgroundColor = "";
+        document.getElementById("loginPassword").style.backgroundColor = "";
         validateLoginPassword();
     };
 }
@@ -629,23 +511,18 @@ function setupLoginForm() {
    7. START WHEN THE PAGE HAS LOADED
    --------------------------------------------------------- */
 
-function start() {
-    addThemeButton();
-
-    // home page
-    if (document.getElementById("matches") != null) {
-        showGreeting();
-        addGamePicture();
-        addMoreMatchesButton();
-    }
-
-    // sign up page
-    if (document.getElementById("signupForm") != null)
-        setupSignupForm();
-
-    // login page
-    if (document.getElementById("loginForm") != null)
-        setupLoginForm();
+// home page
+function startHome() {
+    showGreeting();
+    addMoreMatchesButton();
 }
 
-window.onload = start;
+// sign up page
+function startSignup() {
+    setupSignupForm();
+}
+
+// login page
+function startLogin() {
+    setupLoginForm();
+}

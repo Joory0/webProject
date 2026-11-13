@@ -23,14 +23,15 @@
     </style>
 </head>
 
-<body>
+<body onload="startHome()">
 
     <!--logo  -->
     <header id="top">
-        <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="100" usemap="#logomap">
-        <map name="logomap">
-            <area shape="rect" coords="0,0,200,60" href="aboutUs.html" alt="About Us">
-        </map>
+        <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="90" usemap="#logomap" id="logoPic">
+<map name="logomap">
+    <area shape="rect" coords="0,0,300,90" href="aboutUs.html" alt="About Us"
+          onmouseover="zoomPicture()" onmouseout="resetPicture()">
+</map>
 
         <nav>
             <ul class="menu">
