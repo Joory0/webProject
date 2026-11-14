@@ -43,7 +43,7 @@
                 <input type="email" id="loginEmail" name="email" class="field"
                        placeholder="example@email.com" autofocus required>
                 <span class="error" id="loginEmailError"></span>
-<br><br>
+                <br><br>
                 <label for="loginPassword">Password</label>
                 <input type="password" id="loginPassword" name="password" class="field"
                        placeholder="Enter your password" required>
@@ -54,7 +54,8 @@
                     <label for="remember" class="inline-label">Remember me</label>
                 </p>
 
-                <input type="submit" value="Login" class="form-btn">
+                <input type="submit" value="Login" class="form-btn"
+                       onclick="validateEmail('loginEmail', 'loginEmailError'); validateLoginPassword()">
             </form>
 
             <p class="form-note">
@@ -63,6 +64,7 @@
         </section>
 
     </div>
+
 
     <!-- nav -->
     <footer>

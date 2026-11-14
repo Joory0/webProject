@@ -43,37 +43,37 @@
                 <input type="text" id="fullName" name="fullName" class="field"
                        placeholder="Your full name" maxlength="40" autofocus required>
                 <span class="error" id="nameError"></span>
-<br><br>
+                <br><br>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" class="field"
                        placeholder="example@email.com" required>
                 <span class="error" id="emailError"></span>
-<br><br>
+                <br><br>
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" class="field"
                        placeholder="05XXXXXXXX" maxlength="10" required>
                 <span class="error" id="phoneError"></span>
-<br><br>
+                <br><br>
                 <label for="birthDate">Date of Birth</label>
                 <input type="date" id="birthDate" name="birthDate" class="field">
-<br><br>
+                <br><br>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="field"
                        placeholder="At least 8 characters" required>
                 <span class="error" id="passwordError"></span>
-<br><br>
+                <br><br>
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" class="field"
                        placeholder="Enter the password again" required>
                 <span class="error" id="confirmError"></span>
-<br><br>
+                <br><br>
                 <!-- Radio buttons -->
                 <p class="group-title">Gender</p>
                 <input type="radio" id="male" name="gender" value="male" checked>
                 <label for="male" class="inline-label">Male</label>
                 <input type="radio" id="female" name="gender" value="female">
                 <label for="female" class="inline-label">Female</label>
-<br><br>
+                <br><br>
                 <!-- Drop-down list -->
                 <label for="favGame">What is your Favorite Game ?</label>
                 <select id="favGame" name="favGame" class="field">
@@ -99,7 +99,7 @@
                 </p>
                 <span class="error" id="termsError"></span>
 
-                <input type="submit" value="Sign Up" class="form-btn">
+                <input type="submit" value="Sign Up" class="form-btn" onclick="checkSignupFields()">
                 <input type="reset" value="Clear" class="form-btn reset-btn">
             </form>
 
