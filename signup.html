@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="startSignup()">
 
-    <!-- ===== Header: logo + menu (same on every page) ===== -->
+    <!--  logo  -->
     <header id="top">
         <img src="images/weplay-img.jpg" alt="WePlay logo" width="300" height="90" usemap="#logomap">
         <map name="logomap">
@@ -32,7 +32,7 @@
 
     <div class="main">
 
-        <!-- ===== Sign up form ===== -->
+        <!--  Sign up form  -->
         <section class="box form-box">
             <h2>Create Your Account</h2>
             <p>Join WePlay for free and never miss a Saudi esports match.</p>
@@ -67,7 +67,7 @@
                        placeholder="Enter the password again" required>
                 <span class="error" id="confirmError"></span>
 <br><br>
-                <!-- Radio buttons: same name so only one can be chosen -->
+                <!-- Radio buttons -->
                 <p class="group-title">Gender</p>
                 <input type="radio" id="male" name="gender" value="male" checked>
                 <label for="male" class="inline-label">Male</label>
@@ -84,7 +84,7 @@
                     <option value="dota">Dota 2</option>
                 </select>
 
-                <!-- Checkboxes: more than one can be chosen -->
+                <!-- Checkboxes-->
                 <p class="group-title">Clubs That You Follow</p>
                 <input type="checkbox" id="falcons" name="clubs" value="falcons">
                 <label for="falcons" class="inline-label">Team Falcons</label>
@@ -110,7 +110,7 @@
 
     </div>
 
-    <!-- ===== Footer (same on every page) ===== -->
+    <!-- nav-->
     <footer>
         <p>&copy; 2026 WePlay - CPIS-358 Project</p>
         <p>
@@ -121,7 +121,7 @@
         </p>
     </footer>
 
-    <!-- External JavaScript (teammate's file) -->
+    <!-- External JavaScript  -->
     <script src="js/script.js"></script>
 </body>
 </html>
