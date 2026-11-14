@@ -1,139 +1,38 @@
-/* =========================================================
-   WePlay - External JavaScript (js/script.js)
-   CPIS-358 - JavaScript part: Nouf Seraj
 
-   Works with the HTML pages as they are. Every feature first
-   checks that its element exists on the current page, so one
-   file serves all four pages.
-   ========================================================= */
+var gameNumber = 1;
+var moreMatchesShown = false;
+var termsAccepted = false;
+var currentYear = 2026;
+var birthMessage = "";
 
-
-// ---------- Global variables ----------
-var themeNumber = 1;           // current color theme (1, 2 or 3)
-var gameNumber = 1;            // game shown under the picture
-var moreMatchesShown = false;  // is the extra matches table showing?
-var termsAccepted = false;     // is the terms checkbox ticked?
-
-
-/* ---------------------------------------------------------
-   1. HELPER FUNCTIONS
-   --------------------------------------------------------- */
-
-// count the characters in a text (for...in visits every character)
-function countCharacters(text) {
-    var count = 0;
-
-    for (var position in text)
-        count++;
-
-    return count;
+//  Functions and Events =====
+function startHome() {
+    showGreeting();
+    addGamePicture();
+    addMoreMatchesButton();
 }
 
-// show an error message under a field and make the field red
-function showError(fieldId, errorId, message) {
-    document.getElementById(errorId).innerHTML = message;
-    document.getElementById(errorId).style.color = "red";
-    document.getElementById(errorId).style.fontSize = "14px";
-    document.getElementById(fieldId).style.border = "2px solid red";
+function startSignup() {
+    setupSignupForm();
 }
 
-// remove the error message and make the field green
-function showValid(fieldId, errorId) {
-    document.getElementById(errorId).innerHTML = "";
-    document.getElementById(fieldId).style.border = "2px solid green";
+function startLogin() {
+    setupLoginForm();
 }
 
-// return a field to its normal look
-function clearField(fieldId, errorId) {
-    document.getElementById(fieldId).style.border = "";
-    document.getElementById(fieldId).style.backgroundColor = "";
-    document.getElementById(errorId).innerHTML = "";
+// ===== Logo hover on the home page =====
+// 
+function zoomPicture() {
+    document.getElementById("logoPic").style.boxShadow = "0px 0px 15px #39FF88";
+    document.getElementById("logoPic").style.borderRadius = "10px";
 }
 
-// when the user clicks inside a field, color it light yellow
-function addFocusEffect(fieldId) {
-    document.getElementById(fieldId).onfocus = function () {
-        this.style.backgroundColor = "lightyellow";
-    };
+function resetPicture() {
+    document.getElementById("logoPic").style.boxShadow = "";
+    document.getElementById("logoPic").style.borderRadius = "";
 }
 
-// change the colors of one box if it exists on this page
-function colorBox(boxId, background, text) {
-    var box = document.getElementById(boxId);
-
-    if (box != null) {
-        box.style.backgroundColor = background;
-        box.style.color = text;
-    }
-}
-
-
-/* ---------------------------------------------------------
-   2. THEME BUTTON (all pages) - changes CSS with a switch
-   --------------------------------------------------------- */
-
-function addThemeButton() {
-    // add a new button element to the header
-    document.getElementById("top").innerHTML +=
-        "<button id='themeBtn' onclick='changeTheme()' " +
-        "style='position: fixed; bottom: 20px; left: 20px; z-index: 1000; " +
-        "padding: 10px 16px; border: none; border-radius: 20px; " +
-        "background-color: #3a6248; color: white; cursor: pointer;'>" +
-        "Theme: Default</button>";
-}
-
-function changeTheme() {
-    var headerColor;
-    var boxColor;
-    var textColor;
-    var themeName;
-
-    themeNumber++;
-    if (themeNumber > 3)
-        themeNumber = 1;
-
-    switch (themeNumber) {
-        case 1:
-            headerColor = "";
-            boxColor = "";
-            textColor = "";
-            themeName = "Default";
-            break;
-        case 2:
-            headerColor = "#1e1e1e";
-            boxColor = "#2b2b2b";
-            textColor = "white";
-            themeName = "Dark";
-            break;
-        case 3:
-            headerColor = "#3a6248";
-            boxColor = "#e8f5e9";
-            textColor = "black";
-            themeName = "Green";
-            break;
-    } // end switch
-
-    document.getElementById("top").style.backgroundColor = headerColor;
-
-    // home page boxes
-    colorBox("idea", boxColor, textColor);
-    colorBox("benefits", boxColor, textColor);
-    colorBox("matches", boxColor, textColor);
-    colorBox("clubs", boxColor, textColor);
-
-    // form pages
-    colorBox("signupForm", boxColor, textColor);
-    colorBox("loginForm", boxColor, textColor);
-
-    document.getElementById("themeBtn").innerHTML = "Theme: " + themeName;
-}
-
-
-/* ---------------------------------------------------------
-   3. HOME PAGE - dynamic text, dynamic picture, new elements
-   --------------------------------------------------------- */
-
-// greeting that changes with the time of day
+// ===== Greeting by time of day =====
 function showGreeting() {
     var now = new Date();
     var hour = now.getHours();
@@ -152,72 +51,110 @@ function showGreeting() {
         document.getElementById("idea").innerHTML;
 }
 
-// add a picture that reacts to the mouse
+// ===== Game of the day picture  =====
+
+function getGameName(number) {
+    switch (number) {
+        case 1:
+            return "Valorant";
+        case 2:
+            return "Rocket League";
+        case 3:
+            return "EA SPORTS FC";
+        default:
+            return "Dota 2";
+    }
+}
+
+function getGameColor(number) {
+    switch (number) {
+        case 1:
+            return "#ff4655";
+        case 2:
+            return "#0078f2";
+        case 3:
+            return "#1db954";
+        default:
+            return "#c23c2a";
+    }
+}
+
 function addGamePicture() {
     document.getElementById("idea").innerHTML +=
-        "<p><img id='gamePic' src='images/weplay-img.jpg' alt='WePlay' width='300' " +
-        "onmouseover='zoomPicture()' onmouseout='resetPicture()' onclick='nextGame()' " +
-        "style='cursor: pointer;'></p>" +
-        "<p id='gameText'><strong>Game of the day:</strong> Valorant</p>" +
+        "<div id='gameBox'></div>" +
+        "<p id='gameText'></p>" +
+        "<p id='nextGames'></p>" +
         "<p><small>Click the picture to see the next game.</small></p>";
+
+    showGame();
 }
 
-function zoomPicture() {
-    var picture = document.getElementById("gamePic");
-    picture.width = 330;
-    picture.style.border = "4px solid #549554";
-    picture.style.borderRadius = "10px";
+function showGame() {
+    var name = getGameName(gameNumber);
+    var color = getGameColor(gameNumber);
+    var list = "";
+    var next = gameNumber;
+    var count = 1;
+
+    document.getElementById("gameBox").innerHTML =
+        "<img src='images/game" + gameNumber + ".png' alt='" + name + "' " +
+        "width='300' height='100' onclick='nextGame()' " +
+        "onmouseover='zoomGame(this)' onmouseout='resetGame(this)'>";
+
+    document.getElementById("gameText").innerHTML =
+        "<strong>Game of the day:</strong> " + name;
+    document.getElementById("gameText").style.color = color;
+
+    while (count <= 3) {
+        next++;
+        if (next > 4)
+            next = 1;
+
+        list += getGameName(next);
+        if (count < 3)
+            list += ", ";
+
+        count++;
+    }
+
+    document.getElementById("nextGames").innerHTML = "Coming up next: " + list;
 }
 
-function resetPicture() {
-    var picture = document.getElementById("gamePic");
-    picture.width = 300;
-    picture.style.border = "";
-    picture.style.borderRadius = "";
-}
-
-// change the game name and the picture's glow color
 function nextGame() {
-    var gameName;
-    var color;
-
     gameNumber++;
     if (gameNumber > 4)
         gameNumber = 1;
 
-    switch (gameNumber) {
-        case 1:
-            gameName = "Valorant";
-            color = "#ff4655";
-            break;
-        case 2:
-            gameName = "Rocket League";
-            color = "#0078f2";
-            break;
-        case 3:
-            gameName = "EA SPORTS FC";
-            color = "#1db954";
-            break;
-        default:
-            gameName = "Dota 2";
-            color = "#a83232";
-    } // end switch
-
-    document.getElementById("gameText").innerHTML =
-        "<strong>Game of the day:</strong> " + gameName;
-    document.getElementById("gameText").style.color = color;
-    document.getElementById("gamePic").style.boxShadow = "0 0 15px " + color;
+    showGame();
 }
 
-// add the "Show more matches" button and an empty place for the table
+function zoomGame(picture) {
+    var color = getGameColor(gameNumber);
+
+    picture.style.width = "330px";
+    picture.style.height = "110px";
+    picture.style.border = "3px solid " + color;
+    picture.style.borderRadius = "14px";
+    picture.style.boxShadow = "0px 0px 15px " + color;
+}
+
+function resetGame(picture) {
+    picture.style.width = "300px";
+    picture.style.height = "100px";
+    picture.style.border = "";
+    picture.style.borderRadius = "";
+    picture.style.boxShadow = "";
+}
+
+// ===== Show / hide extra matches table =====
+// Dynamic Elements (add and delete), Loops (for)
 function addMoreMatchesButton() {
     document.getElementById("matches").innerHTML +=
-        "<button id='moreBtn' class='btn' onclick='toggleMoreMatches()' " +
-        "style='cursor: pointer;'>Show more matches</button>" +
+        "<p><button id='moreBtn' class='more-btn' onclick='toggleMoreMatches()'>" +
+        "Show more matches</button></p>" +
         "<div id='moreMatches'></div>";
 }
 
-// return the cells of one extra match
 function getMatchRow(number) {
     switch (number) {
         case 1:
@@ -226,20 +163,16 @@ function getMatchRow(number) {
         case 2:
             return "<td>27 Nov 2026</td><td>10:00 PM</td><td>Valorant</td>" +
                 "<td>R8 Esports vs Al Qadsiah</td>";
-        case 3:
+        default:
             return "<td>1 Dec 2026</td><td>7:30 PM</td><td>Rocket League</td>" +
                 "<td>Twisted Minds vs R8 Esports</td>";
-        default:
-            return "";
-    } // end switch
+    }
 }
 
-// add the extra table, or delete it if it is already showing
 function toggleMoreMatches() {
     var rows = "";
 
     if (moreMatchesShown == false) {
-        // build the rows with a for loop
         for (var i = 1; i <= 3; i++) {
             rows += "<tr onmouseover='highlightRow(this)' onmouseout='normalRow(this)'>" +
                 getMatchRow(i) + "</tr>";
@@ -254,24 +187,47 @@ function toggleMoreMatches() {
         moreMatchesShown = true;
     }
     else {
-        document.getElementById("moreMatches").innerHTML = "";   // delete the table
+        document.getElementById("moreMatches").innerHTML = "";
         document.getElementById("moreBtn").innerHTML = "Show more matches";
         moreMatchesShown = false;
     }
 }
 
 function highlightRow(row) {
-    row.style.backgroundColor = "#d9f0d9";
+    row.style.backgroundColor = "#2a3a2f";
 }
 
 function normalRow(row) {
     row.style.backgroundColor = "";
 }
 
+// ===== Form  functions=====
+//  Change HTML elements and CSS styles using script
+function showError(fieldId, errorId, message) {
+    document.getElementById(errorId).innerHTML = message;
+    document.getElementById(errorId).style.color = "#ff6b6b";
+    document.getElementById(errorId).style.fontSize = "14px";
+    document.getElementById(fieldId).style.border = "2px solid red";
+    document.getElementById(fieldId).style.backgroundColor = "";
+}
 
-/* ---------------------------------------------------------
-   4. VALIDATION FUNCTIONS (each one returns true or false)
-   --------------------------------------------------------- */
+function showValid(fieldId, errorId) {
+    document.getElementById(errorId).innerHTML = "";
+    document.getElementById(fieldId).style.border = "2px solid #39FF88";
+    document.getElementById(fieldId).style.backgroundColor = "";
+}
+
+function clearField(fieldId, errorId) {
+    document.getElementById(fieldId).style.border = "";
+    document.getElementById(fieldId).style.backgroundColor = "";
+    document.getElementById(errorId).innerHTML = "";
+}
+
+function highlightField(fieldId) {
+    document.getElementById(fieldId).style.backgroundColor = "lightyellow";
+}
+
+// ===== Form Validation functions =====
 
 function validateName() {
     var name = document.getElementById("fullName").value;
@@ -280,8 +236,8 @@ function validateName() {
         showError("fullName", "nameError", "Please enter your full name.");
         return false;
     }
-    else if (countCharacters(name) < 3) {
-        showError("fullName", "nameError", "Name must be at least 3 characters.");
+    else if ("" + parseInt(name) == name) {
+        showError("fullName", "nameError", "Name cannot be a number.");
         return false;
     }
     else {
@@ -292,29 +248,9 @@ function validateName() {
 
 function validateEmail(fieldId, errorId) {
     var email = document.getElementById(fieldId).value;
-    var atCount = 0;          // how many @ signs
-    var atPosition = -1;      // where the @ is
-    var dotAfterAt = false;   // is there a dot after the @ ?
-
-    // look at every character of the email
-    for (var p in email) {
-        var position = parseInt(p);
-
-        if (email[p] == "@") {
-            atCount++;
-            atPosition = position;
-        }
-        else if (email[p] == "." && atPosition > 0 && position > atPosition + 1) {
-            dotAfterAt = true;
-        }
-    }
 
     if (email == "") {
         showError(fieldId, errorId, "Please enter your email.");
-        return false;
-    }
-    else if (atCount != 1 || atPosition < 1 || dotAfterAt == false) {
-        showError(fieldId, errorId, "Email must look like name@example.com.");
         return false;
     }
     else {
@@ -325,39 +261,21 @@ function validateEmail(fieldId, errorId) {
 
 function validatePhone() {
     var phone = document.getElementById("phone").value;
-    var phoneLength = countCharacters(phone);
-    var allDigits = true;
-    var allSame = true;
-
-    // check that every character is a digit
-    for (var p in phone) {
-        if (phone[p] < "0" || phone[p] > "9") {
-            allDigits = false;
-            break;
-        }
-    }
-
-    // check if the last 8 digits are all the same, like 0555555555
-    for (var q in phone) {
-        if (parseInt(q) >= 2 && phone[q] != phone[2]) {
-            allSame = false;
-            break;
-        }
-    }
+    var number = parseInt(phone);
 
     if (phone == "") {
         showError("phone", "phoneError", "Please enter your phone number.");
         return false;
     }
-    else if (allDigits == false) {
-        showError("phone", "phoneError", "Phone number must contain digits only.");
+    else if ("0" + number != phone) {
+        showError("phone", "phoneError", "Phone must start with 0 and contain digits only.");
         return false;
     }
-    else if (phoneLength != 10 || phone[0] != "0" || phone[1] != "5") {
+    else if (number < 500000000 || number > 599999999) {
         showError("phone", "phoneError", "Phone must start with 05 and have exactly 10 digits.");
         return false;
     }
-    else if (allSame == true) {
+    else if ((number - 500000000) % 11111111 == 0) {
         showError("phone", "phoneError", "Please enter a real phone number.");
         return false;
     }
@@ -367,69 +285,51 @@ function validatePhone() {
     }
 }
 
-// date of birth: not in the future, at least 10 years old, not more than 100 years ago
-function validateBirthDate(showAlert) {
-    var field = document.getElementById("birthDate");
-    var message = "";
+function validateBirthDate() {
+    var birth = document.getElementById("birthDate").value;
+    var year = parseInt(birth);
+    var age = currentYear - year;
 
-    if (field.value == "") {
-        field.style.border = "";
-        return true;                    // the field is optional
+    if (birth == "")
+        birthMessage = "";
+    else if (year > currentYear)
+        birthMessage = "Date of birth cannot be in the future.";
+    else if (age < 10)
+        birthMessage = "You must be at least 10 years old to sign up.";
+    else if (age > 100)
+        birthMessage = "Please enter a valid date of birth.";
+    else
+        birthMessage = "";
+
+    document.getElementById("birthDate").style.backgroundColor = "";
+
+    if (birth == "") {
+        document.getElementById("birthDate").style.border = "";
+        return true;
     }
-
-    var birth = new Date(field.value);
-    var today = new Date();
-
-    // subtracting two dates gives milliseconds
-    var days = (today - birth) / (1000 * 60 * 60 * 24);
-    var years = days / 365.25;
-
-    if (days < 0)
-        message = "Date of birth cannot be in the future.";
-    else if (years < 10)
-        message = "You must be at least 10 years old to sign up.";
-    else if (years > 100)
-        message = "Please enter a valid date of birth (not more than 100 years ago).";
-
-    if (message != "") {
-        field.style.border = "2px solid red";
-        if (showAlert)
-            window.alert(message);
+    else if (birthMessage != "") {
+        document.getElementById("birthDate").style.border = "2px solid red";
         return false;
     }
     else {
-        field.style.border = "2px solid green";
+        document.getElementById("birthDate").style.border = "2px solid #39FF88";
         return true;
     }
 }
 
 function validatePassword() {
     var password = document.getElementById("password").value;
-    var passwordLength = countCharacters(password);
-    var digits = 0;
-    var i = 0;
-
-    // count the digits in the password (while loop)
-    while (i < passwordLength) {
-        if (password[i] >= "0" && password[i] <= "9")
-            digits++;
-        i++;
-    }
 
     if (password == "") {
         showError("password", "passwordError", "Please enter a password.");
         return false;
     }
-    else if (passwordLength < 8) {
-        showError("password", "passwordError", "Password must be at least 8 characters.");
-        return false;
-    }
-    else if (digits == 0) {
-        showError("password", "passwordError", "Password must contain at least one number.");
-        return false;
-    }
-    else if (digits == passwordLength) {
+    else if ("" + parseInt(password) == password) {
         showError("password", "passwordError", "Password must contain letters too.");
+        return false;
+    }
+    else if (password.toUpperCase() == password) {
+        showError("password", "passwordError", "Password must contain at least one small letter.");
         return false;
     }
     else {
@@ -460,7 +360,7 @@ function validateTerms() {
     if (termsAccepted == false) {
         document.getElementById("termsError").innerHTML =
             "You must agree to the terms and conditions.";
-        document.getElementById("termsError").style.color = "red";
+        document.getElementById("termsError").style.color = "#ff6b6b";
         return false;
     }
     else {
@@ -476,28 +376,18 @@ function validateLoginPassword() {
         showError("loginPassword", "loginPasswordError", "Please enter your password.");
         return false;
     }
-    else if (countCharacters(password) < 8) {
-        showError("loginPassword", "loginPasswordError", "Password is at least 8 characters.");
-        return false;
-    }
     else {
         showValid("loginPassword", "loginPasswordError");
         return true;
     }
 }
 
-
-/* ---------------------------------------------------------
-   5. SIGN UP PAGE
-   --------------------------------------------------------- */
-
-// runs when the Sign Up button is clicked
+// ===== Sign Up page =====
 function validateSignup() {
-    // call every check so all the errors show at once
     var nameOk = validateName();
     var emailOk = validateEmail("email", "emailError");
     var phoneOk = validatePhone();
-    var birthOk = validateBirthDate(true);
+    var birthOk = validateBirthDate();
     var passwordOk = validatePassword();
     var confirmOk = validateConfirm();
     var termsOk = validateTerms();
@@ -506,7 +396,6 @@ function validateSignup() {
         window.alert("Welcome to WePlay, " +
             document.getElementById("fullName").value + "! Your account is ready.");
 
-        // empty the text fields
         document.getElementById("fullName").value = "";
         document.getElementById("email").value = "";
         document.getElementById("phone").value = "";
@@ -515,78 +404,56 @@ function validateSignup() {
         document.getElementById("confirmPassword").value = "";
         clearSignupForm();
     }
-    else if (birthOk) {
-        // a wrong birth date already showed its own alert
+    else if (birthOk == false) {
+        window.alert(birthMessage + " Please fix the fields marked in red.");
+    }
+    else {
         window.alert("Please fix the fields marked in red.");
     }
-
-    return false;   // stay on the page (there is no server)
+    return false;
 }
 
-// remove all colors and messages (also runs when Clear is clicked)
 function clearSignupForm() {
     clearField("fullName", "nameError");
     clearField("email", "emailError");
     clearField("phone", "phoneError");
+    document.getElementById("birthDate").style.border = "";
+    document.getElementById("birthDate").style.backgroundColor = "";
     clearField("password", "passwordError");
     clearField("confirmPassword", "confirmError");
-    document.getElementById("birthDate").style.border = "";
     document.getElementById("termsError").innerHTML = "";
 }
 
 function setupSignupForm() {
-    var form = document.getElementById("signupForm");
-
-    form.onsubmit = validateSignup;
-    form.onreset = function () {
-        termsAccepted = false;      // Clear un-ticks the checkbox
+    document.getElementById("signupForm").onsubmit = function () {
+        return validateSignup();
+    };
+    document.getElementById("signupForm").onreset = function () {
+        termsAccepted = false;
         clearSignupForm();
     };
 
-    addFocusEffect("fullName");
-    addFocusEffect("email");
-    addFocusEffect("phone");
-    addFocusEffect("birthDate");
-    addFocusEffect("password");
-    addFocusEffect("confirmPassword");
+    document.getElementById("fullName").onfocus = function () { highlightField("fullName"); };
+    document.getElementById("email").onfocus = function () { highlightField("email"); };
+    document.getElementById("phone").onfocus = function () { highlightField("phone"); };
+    document.getElementById("birthDate").onfocus = function () { highlightField("birthDate"); };
+    document.getElementById("password").onfocus = function () { highlightField("password"); };
+    document.getElementById("confirmPassword").onfocus = function () { highlightField("confirmPassword"); };
 
-    // check each field when the user leaves it
-    document.getElementById("fullName").onblur = function () {
-        this.style.backgroundColor = "";
-        validateName();
-    };
-    document.getElementById("email").onblur = function () {
-        this.style.backgroundColor = "";
-        validateEmail("email", "emailError");
-    };
-    document.getElementById("phone").onblur = function () {
-        this.style.backgroundColor = "";
-        validatePhone();
-    };
-    document.getElementById("birthDate").onblur = function () {
-        this.style.backgroundColor = "";
-        validateBirthDate(true);
-    };
-    document.getElementById("password").onblur = function () {
-        this.style.backgroundColor = "";
-        validatePassword();
-    };
-    document.getElementById("confirmPassword").onblur = function () {
-        this.style.backgroundColor = "";
-        validateConfirm();
-    };
+    document.getElementById("fullName").onblur = function () { validateName(); };
+    document.getElementById("email").onblur = function () { validateEmail("email", "emailError"); };
+    document.getElementById("phone").onblur = function () { validatePhone(); };
+    document.getElementById("birthDate").onblur = function () { validateBirthDate(); };
+    document.getElementById("password").onblur = function () { validatePassword(); };
+    document.getElementById("confirmPassword").onblur = function () { validateConfirm(); };
 
-    // every click on the checkbox switches it between ticked and not ticked
     document.getElementById("terms").onclick = function () {
         termsAccepted = !termsAccepted;
         validateTerms();
     };
 }
 
-
-/* ---------------------------------------------------------
-   6. LOGIN PAGE
-   --------------------------------------------------------- */
+// ===== Login page=====
 
 function validateLogin() {
     var emailOk = validateEmail("loginEmail", "loginEmailError");
@@ -602,50 +469,21 @@ function validateLogin() {
     else {
         window.alert("Please fix the fields marked in red.");
     }
-
-    return false;   // stay on the page (there is no server)
+    return false;
 }
 
 function setupLoginForm() {
-    var form = document.getElementById("loginForm");
+    document.getElementById("loginForm").onsubmit = function () {
+        return validateLogin();
+    };
 
-    form.onsubmit = validateLogin;
-
-    addFocusEffect("loginEmail");
-    addFocusEffect("loginPassword");
+    document.getElementById("loginEmail").onfocus = function () { highlightField("loginEmail"); };
+    document.getElementById("loginPassword").onfocus = function () { highlightField("loginPassword"); };
 
     document.getElementById("loginEmail").onblur = function () {
-        this.style.backgroundColor = "";
         validateEmail("loginEmail", "loginEmailError");
     };
     document.getElementById("loginPassword").onblur = function () {
-        this.style.backgroundColor = "";
         validateLoginPassword();
     };
 }
-
-
-/* ---------------------------------------------------------
-   7. START WHEN THE PAGE HAS LOADED
-   --------------------------------------------------------- */
-
-function start() {
-    addThemeButton();
-
-    // home page
-    if (document.getElementById("matches") != null) {
-        showGreeting();
-        addGamePicture();
-        addMoreMatchesButton();
-    }
-
-    // sign up page
-    if (document.getElementById("signupForm") != null)
-        setupSignupForm();
-
-    // login page
-    if (document.getElementById("loginForm") != null)
-        setupLoginForm();
-}
-
-window.onload = start;

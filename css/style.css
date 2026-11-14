@@ -1,6 +1,4 @@
-/* ===== WePlay - External Style Sheet (Neon Gaming Theme) ===== */
 
-/* ----- Page ----- */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -27,7 +25,7 @@ h3 {
     text-shadow: 0px 0px 8px rgba(209, 123, 255, 0.6);
 }
 
-/* ----- Header and menu (same on every page) ----- */
+/* ----- Header and menu with neon color and shadow ----- */
 header {
     background-color: #1E1F26;
     text-align: center;
@@ -41,33 +39,32 @@ header {
     padding: 0px;
 }
 
-.menu li {
-    display: inline;
-}
+    .menu li {
+        display: inline;
+    }
 
-.menu a {
-    color: #A9AAB4;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid #1E1F26;
-    border-radius: 20px;
-}
+    .menu a {
+        color: #A9AAB4;
+        font-weight: bold;
+        padding: 8px 16px;
+        border: 1px solid #1E1F26;
+        border-radius: 20px;
+    }
 
-.menu a:hover {
-    color: #D17BFF;
-    border: 1px solid #D17BFF;
-    box-shadow: 0px 0px 10px #D17BFF;
-}
+        .menu a:hover {
+            color: #D17BFF;
+            border: 1px solid #D17BFF;
+            box-shadow: 0px 0px 10px #D17BFF;
+        }
 
-/* the page the user is on now */
-.menu a.current {
-    color: #15161B;
-    background-color: #39FF88;
-    box-shadow: 0px 0px 12px #39FF88;
-}
+        /* the page the user is on now (best practices) */
+        .menu a.current {
+            color: #15161B;
+            background-color: #39FF88;
+            box-shadow: 0px 0px 12px #39FF88;
+        }
 
-/* ----- Hero: layering (z-index) ----- */
+/* ----- layering (z-index) ----- */
 .hero {
     position: relative;
     height: 260px;
@@ -97,32 +94,31 @@ header {
     padding-top: 50px;
 }
 
-.hero-text h1 {
-    margin: 0px;
-}
+    .hero-text h1 {
+        margin: 0px;
+    }
 
-.hero-text p {
-    color: #D6D7DE;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
+    .hero-text p {
+        color: #D6D7DE;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
 
-/* ----- General classes (can be used on any page) ----- */
+/* ----- General classes style ----- */
 a.btn {
     background-color: #39FF88;
     color: #15161B;
     padding: 10px 24px;
     font-weight: bold;
-    text-decoration: none;
     border: 2px solid #39FF88;
     border-radius: 25px;
     box-shadow: 0px 0px 15px #39FF88;
 }
 
-a.btn:hover {
-    background-color: #15161B;
-    color: #39FF88;
-}
+    a.btn:hover {
+        background-color: #15161B;
+        color: #39FF88;
+    }
 
 .main {
     width: 85%;
@@ -140,7 +136,7 @@ a.btn:hover {
     box-shadow: 0px 0px 12px rgba(209, 123, 255, 0.25);
 }
 
-/* badge on top of the box (layering) */
+/* the NEW badge on top of the upcoming matches box (layering) */
 .badge {
     position: absolute;
     top: -12px;
@@ -168,31 +164,30 @@ ul li, ol li {
 /* ----- Table ----- */
 .matches {
     width: 100%;
-    border-collapse: collapse;
 }
 
-.matches caption {
-    color: #8B8D95;
-    padding-bottom: 8px;
-}
+    .matches caption {
+        color: #8B8D95;
+        padding-bottom: 8px;
+    }
 
-.matches th {
-    background-color: #15161B;
-    color: #39FF88;
-    padding: 10px;
-    border-bottom: 2px solid #39FF88;
-}
+    .matches th {
+        background-color: #15161B;
+        color: #39FF88;
+        padding: 10px;
+        border-bottom: 2px solid #39FF88;
+    }
 
-.matches td {
-    padding: 10px;
-    border-bottom: 1px solid #3A3B45;
-    text-align: center;
-}
+    .matches td {
+        padding: 10px;
+        border-bottom: 1px solid #3A3B45;
+        text-align: center;
+    }
 
-.matches tfoot td {
-    color: #D17BFF;
-    font-style: italic;
-}
+    .matches tfoot td {
+        color: #D17BFF;
+        font-style: italic;
+    }
 
 /* ----- Multiple columns ----- */
 .columns {
@@ -205,7 +200,6 @@ ul li, ol li {
 summary {
     font-weight: bold;
     color: #D17BFF;
-    cursor: pointer;
     padding: 6px 0px;
 }
 
@@ -218,7 +212,7 @@ strong {
     color: #FFFFFF;
 }
 
-/* ----- Footer (same on every page) ----- */
+/* ----- Footer nav ----- */
 footer {
     background-color: #0E0F13;
     border-top: 2px solid #D17BFF;
@@ -228,18 +222,6 @@ footer {
     padding: 15px;
 }
 
-footer a:link, footer a:visited {
-    color: #39FF88;
-}
-
-/* ----- Print version (media types) ----- */
-@media print {
-    body {
-        background-color: white;
-        color: black;
-        font-family: Georgia, serif;
+    footer a:link, footer a:visited {
+        color: #39FF88;
     }
-    nav, footer {
-        display: none;
-    }
-}
