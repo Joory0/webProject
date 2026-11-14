@@ -21,7 +21,7 @@ function startLogin() {
 }
 
 // ===== Logo hover on the home page =====
-// 
+
 function zoomPicture() {
     document.getElementById("logoPic").style.boxShadow = "0px 0px 15px #39FF88";
     document.getElementById("logoPic").style.borderRadius = "10px";
@@ -147,7 +147,7 @@ function resetGame(picture) {
 }
 
 // ===== Show / hide extra matches table =====
-// Dynamic Elements (add and delete), Loops (for)
+
 function addMoreMatchesButton() {
     document.getElementById("matches").innerHTML +=
         "<p><button id='moreBtn' class='more-btn' onclick='toggleMoreMatches()'>" +
